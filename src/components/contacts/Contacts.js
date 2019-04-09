@@ -30,14 +30,14 @@ class Contacts extends Component {
   render() {
     const { contacts } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <div className="container">
           <h1 className="display-4 mb-2 text-center">Contacts</h1>
           {contacts.map(contact => (
             <Contact key={contact.id} contact={contact} />
           ))}
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

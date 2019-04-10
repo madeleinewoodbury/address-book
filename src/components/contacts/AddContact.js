@@ -8,7 +8,8 @@ class AddContact extends Component {
     name: "",
     street: "",
     city: "",
-    zipcode: ""
+    zipcode: "",
+    errors: {}
   };
 
   // Update input value on change
@@ -19,6 +20,27 @@ class AddContact extends Component {
 
     // Get the values form the state
     const { name, street, city, zipcode } = this.state;
+
+    // Chech for errors
+    if (name === "") {
+      this.setState({ errors: { name: "Name is required" } });
+      return;
+    }
+
+    if (street === "") {
+      this.setState({ errors: { street: "Street address is required" } });
+      return;
+    }
+
+    if (city === "") {
+      this.setState({ errors: { city: "City is required" } });
+      return;
+    }
+
+    if (zipcode === "") {
+      this.setState({ errors: { zipcode: "Zipcode is required" } });
+      return;
+    }
 
     const newContact = {
       id: uuid(),
@@ -36,12 +58,13 @@ class AddContact extends Component {
       name: "",
       street: "",
       city: "",
-      zipcode: ""
+      zipcode: "",
+      errors: {}
     });
   };
 
   render() {
-    const { name, street, city, zipcode } = this.state;
+    const { name, street, city, zipcode, errors } = this.state;
 
     return (
       <Consumer>
@@ -59,6 +82,7 @@ class AddContact extends Component {
                       placeholder="Enter Name"
                       value={name}
                       onChange={this.onChange}
+                      error={errors.name}
                     />
                     <TextInputGroup
                       label="Street"
@@ -66,6 +90,7 @@ class AddContact extends Component {
                       placeholder="Enter Street Address"
                       value={street}
                       onChange={this.onChange}
+                      error={errors.street}
                     />
                     <TextInputGroup
                       label="City"
@@ -73,6 +98,7 @@ class AddContact extends Component {
                       placeholder="Enter City"
                       value={city}
                       onChange={this.onChange}
+                      error={errors.city}
                     />
                     <TextInputGroup
                       label="Zipcode"
@@ -80,6 +106,7 @@ class AddContact extends Component {
                       placeholder="Enter Zipcode"
                       value={zipcode}
                       onChange={this.onChange}
+                      error={errors.zipcode}
                     />
                     <input
                       type="submit"

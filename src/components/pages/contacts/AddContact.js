@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Consumer } from "../../context";
-import TextInputGroup from "../layout/TextInputGroup";
+import { Consumer } from "../../../context";
+import TextInputGroup from "../../layout/TextInputGroup";
 import uuid from "uuid";
 
 class AddContact extends Component {
@@ -71,7 +71,7 @@ class AddContact extends Component {
         {value => {
           const { dispatch } = value;
           return (
-            <div className="container">
+            <div className="container mt-5">
               <div className="card mb-3">
                 <div className="card-header">Add Contact</div>
                 <div className="card-body">

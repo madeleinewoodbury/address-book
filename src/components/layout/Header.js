@@ -14,12 +14,12 @@ const Header = () => {
             </a>
           </li>
           <li className="nav-item">
-            <a href="/" className="nav-link">
+            <a href="/contact/add" className="nav-link">
               <i className="fas fa-user-plus" /> Add
             </a>
           </li>
           <li className="nav-item">
-            <a href="/" className="nav-link">
+            <a href="/about" className="nav-link">
               <i className="fas fa-question" /> About
             </a>
           </li>

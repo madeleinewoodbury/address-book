@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Contact from "./Contact";
-import { Consumer } from "../../context";
+import { Consumer } from "../../../context";
 
 class Contacts extends Component {
   render() {
@@ -10,8 +10,8 @@ class Contacts extends Component {
           const { contacts } = value;
           return (
             <React.Fragment>
-              <div className="container">
-                <h1 className="display-4 mb-3 text-center">Contact List</h1>
+              <div className="container mt-5">
+                {/* <h1 className="display-4 mb-3 text-center">Contact List</h1> */}
                 {contacts.map(contact => (
                   <Contact key={contact.id} contact={contact} />
                 ))}

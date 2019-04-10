@@ -41,9 +41,9 @@ class Contact extends Component {
               </h4>
               {showContactInfo ? (
                 <ul className="list-group">
-                  <li className="list-group-item">Street: {street}</li>
-                  <li className="list-group-item">City: {city}</li>
-                  <li className="list-group-item">Zipcode: {zipcode}</li>
+                  <li className="list-group-item lead">Street: {street}</li>
+                  <li className="list-group-item lead">City: {city}</li>
+                  <li className="list-group-item lead">Zipcode: {zipcode}</li>
                 </ul>
               ) : null}
             </div>

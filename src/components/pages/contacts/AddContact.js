@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Consumer } from "../../../context";
 import TextInputGroup from "../../layout/TextInputGroup";
-import uuid from "uuid";
+import axios from "axios";
 
 class AddContact extends Component {
   state = {
@@ -15,7 +15,7 @@ class AddContact extends Component {
   // Update input value on change
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
-  onSubmit = (dispatch, e) => {
+  onSubmit = async (dispatch, e) => {
     e.preventDefault();
 
     // Get the values form the state
@@ -43,15 +43,19 @@ class AddContact extends Component {
     }
 
     const newContact = {
-      id: uuid(),
       name,
       street,
       city,
       zipcode
     };
 
-    // Call the dispatch in the context
-    dispatch({ type: "ADD_CONTACT", payload: newContact });
+    // Post request
+    const res = await axios.post(
+      "https://jsonplaceholder.typicode.com/users",
+      newContact
+    );
+
+    dispatch({ type: "ADD_CONTACT", payload: res.data });
 
     // Clear the form and state
     this.setState({
@@ -61,6 +65,9 @@ class AddContact extends Component {
       zipcode: "",
       errors: {}
     });
+
+    // Redirect to home page
+    this.props.history.push("/");
   };
 
   render() {

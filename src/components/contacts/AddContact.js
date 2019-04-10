@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Consumer } from "../../context";
+import TextInputGroup from "../layout/TextInputGroup";
 import uuid from "uuid";
 
 class AddContact extends Component {
@@ -29,6 +30,14 @@ class AddContact extends Component {
 
     // Call the dispatch in the context
     dispatch({ type: "ADD_CONTACT", payload: newContact });
+
+    // Clear the form and state
+    this.setState({
+      name: "",
+      street: "",
+      city: "",
+      zipcode: ""
+    });
   };
 
   render() {
@@ -44,50 +53,34 @@ class AddContact extends Component {
                 <div className="card-header">Add Contact</div>
                 <div className="card-body">
                   <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                    <div className="form-group">
-                      <label htmlFor="name">Name</label>
-                      <input
-                        type="text"
-                        className="form-control form-control-lg"
-                        placeholder="Enter Name"
-                        name="name"
-                        value={name}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="street">Street</label>
-                      <input
-                        type="text"
-                        className="form-control form-control-lg"
-                        placeholder="Enter Street Address"
-                        name="street"
-                        value={street}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="city">City</label>
-                      <input
-                        type="text"
-                        className="form-control form-control-lg"
-                        placeholder="Enter City"
-                        name="city"
-                        value={city}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="zipcode">Zipcode</label>
-                      <input
-                        type="text"
-                        className="form-control form-control-lg"
-                        placeholder="Enter Zipcode"
-                        name="zipcode"
-                        value={zipcode}
-                        onChange={this.onChange}
-                      />
-                    </div>
+                    <TextInputGroup
+                      label="Name"
+                      name="name"
+                      placeholder="Enter Name"
+                      value={name}
+                      onChange={this.onChange}
+                    />
+                    <TextInputGroup
+                      label="Street"
+                      name="street"
+                      placeholder="Enter Street Address"
+                      value={street}
+                      onChange={this.onChange}
+                    />
+                    <TextInputGroup
+                      label="City"
+                      name="city"
+                      placeholder="Enter City"
+                      value={city}
+                      onChange={this.onChange}
+                    />
+                    <TextInputGroup
+                      label="Zipcode"
+                      name="zipcode"
+                      placeholder="Enter Zipcode"
+                      value={zipcode}
+                      onChange={this.onChange}
+                    />
                     <input
                       type="submit"
                       value="Add Contact"

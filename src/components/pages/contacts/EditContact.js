@@ -3,7 +3,7 @@ import { Consumer } from "../../../context";
 import TextInputGroup from "../../layout/TextInputGroup";
 import axios from "axios";
 
-class AddContact extends Component {
+class EditContact extends Component {
   state = {
     name: "",
     street: "",
@@ -12,10 +12,23 @@ class AddContact extends Component {
     errors: {}
   };
 
+  async componentDidMount() {
+    const { id } = this.props.match.params;
+    const res = await axios.get(
+      `https://jsonplaceholder.typicode.com/users/${id}`
+    );
+    const contact = res.data;
+
+    this.setState({
+      name: contact.name,
+      street: contact.address.street,
+      city: contact.address.city,
+      zipcode: contact.address.zipcode
+    });
+  }
+
   // Update input value on change
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = async (dispatch, e) => {
     e.preventDefault();
@@ -44,23 +57,6 @@ class AddContact extends Component {
       return;
     }
 
-    const newContact = {
-      name,
-      address: {
-        street,
-        city,
-        zipcode
-      }
-    };
-
-    // Post request
-    const res = await axios.post(
-      "https://jsonplaceholder.typicode.com/users",
-      newContact
-    );
-
-    dispatch({ type: "ADD_CONTACT", payload: res.data });
-
     // Clear the form and state
     this.setState({
       name: "",
@@ -76,7 +72,6 @@ class AddContact extends Component {
 
   render() {
     const { name, street, city, zipcode, errors } = this.state;
-
     return (
       <Consumer>
         {value => {
@@ -84,7 +79,7 @@ class AddContact extends Component {
           return (
             <div className="container mt-5">
               <div className="card mb-3">
-                <div className="card-header">Add Contact</div>
+                <div className="card-header">Edit Contact</div>
                 <div className="card-body">
                   <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                     <TextInputGroup
@@ -121,7 +116,7 @@ class AddContact extends Component {
                     />
                     <input
                       type="submit"
-                      value="Add Contact"
+                      value="Update Contact"
                       className="btn btn-dark btn-block"
                     />
                   </form>
@@ -135,4 +130,4 @@ class AddContact extends Component {
   }
 }
 
-export default AddContact;
+export default EditContact;
